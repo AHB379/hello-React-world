@@ -1,4 +1,4 @@
 import ReactDOM from "react-dom";
-import App from "./App";
+import FunctionalApp from "./FunctionalApp";
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<FunctionalApp/>, document.getElementById('root'));
