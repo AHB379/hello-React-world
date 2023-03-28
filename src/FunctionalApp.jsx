@@ -1,30 +1,27 @@
 import { useState } from "react";
+import AppContext from "./AppContext";
+import {useContext} from "react";
 
-function FunctionalApp(){
-    const [count, setCount] = useState(0);
-    const [name, setName] = useState("Amirhossein");
+function FunctionalApp(props){
+    const context = useContext(AppContext);
+    const [myPerson, setMyPerson] = useState(search_myPerson());
     return(
         <>
-        <h1>{name} {count}</h1>
-        <button onClick={increase} style={{background : 'green'}}>+</button>
-        <button onClick={decrease} style={{background : 'red'}}>-</button>
-        <button onClick={() =>{resetName(name,setName)}} style={{background : 'yellow'}}>reset Name</button>
+        <h1>{myPerson.biography}</h1>
+        <h2>age: {myPerson.age}</h2>
+        <img src={myPerson.image}/>
+        {props.children}
+        <button onClick={()=>{context.increaseAge(myPerson.biography)}}></button>
         </>
     );
 
-    function increase(){
-        setCount(count + 1);
-    };
-    function decrease(){
-        setCount(count - 1);
-    };
+    function search_myPerson(){
+        for(let index of context.person){
+            if(index.biography === props.biography){
+                return index;
+            }
+        }
+    }
 }
-
-function resetName(name, setName){
-    if(name == "Amirhossein")
-        setName("Barzegari");
-    else
-        setName("Amirhossein");
-};
 
 export default FunctionalApp;
